@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 const ContenedorHeader = styled.header`
     background-color: #159463;
-    padding: 10px;
+    padding: 1rem;
     font-weight: bold;
     color: #ffffff;
 `;
