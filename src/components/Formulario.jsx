@@ -133,6 +133,7 @@ const Formulario = ( { guardarGastos }) => {
 
             guardarMarcaSeleccionada(e.target.value);
             guardarModelos(e.target.value !== "" ? modelosAux : "");
+
         } else if (e.target.name === 'modelo') {
 
             marcas[marcaSeleccionada].filter(info => {
