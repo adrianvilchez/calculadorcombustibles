@@ -54,7 +54,7 @@ const Boton = styled.button`
     }
 `;
 
-const Formulario = ( { guardarGastos }) => {
+const Formulario = ( { guardarGastos, guardarCargando }) => {
    
     const [ datos, guardarDatos ] = useState({
         marca: '',
@@ -161,19 +161,27 @@ const Formulario = ( { guardarGastos }) => {
 
         if (combustible === '' || consumo === 0 || costeTotal === 0) return null;
 
-        guardarGastos({
-            datos,
-            consumo : infoVehiculo.consumo,
-            costeKm : precioKm.toFixed(3),
-            costeTotal : (precioKm * kilometros).toFixed(3)
-        })
+        guardarCargando(true);
 
-        guardarDatos({
-            ...datos,
-            consumo : 0,
-            costeKm : 0,
-            costeTotal : 0
-        })
+        // 3 segundos para que desaparezca la carga
+        setTimeout(() => {
+            guardarCargando(false);
+
+            guardarGastos({
+                datos,
+                consumo : infoVehiculo.consumo,
+                costeKm : precioKm.toFixed(3),
+                costeTotal : (precioKm * kilometros).toFixed(3)
+            })
+    
+            guardarDatos({
+                ...datos,
+                consumo : 0,
+                costeKm : 0,
+                costeTotal : 0
+            })
+        }, 3000);
+
         
       }, [ datos ]);
       

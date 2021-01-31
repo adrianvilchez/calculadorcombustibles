@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import Formulario from './components/Formulario';
 import Gasto from './components/Gasto';
+import Carga from './components/Carga';
 
 import styled from '@emotion/styled';
 
@@ -14,6 +15,7 @@ const ContenedorPrincipal = styled.div`
 const ContenedorFormulario = styled.div`
     background-color: #FFFFFF;
     padding: 3rem;
+    margin: 0 auto;
 `;
 
 function App() {
@@ -30,6 +32,8 @@ function App() {
         }
     });
 
+    const [ cargando, guardarCargando ] = useState(false);
+
     const { datos } = gastos;
 
   return (
@@ -41,7 +45,10 @@ function App() {
         <ContenedorFormulario>
             <Formulario
                 guardarGastos = { guardarGastos }
+                guardarCargando = { guardarCargando }
             />
+
+            { cargando ? <Carga /> : null }
 
             <Gasto
                 datos = { datos }
