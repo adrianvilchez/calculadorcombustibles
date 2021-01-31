@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Error from './Error';
-import Gasto from './Gasto';
 
 import { calculoCombustible } from '../helper';
 
@@ -55,7 +54,7 @@ const Boton = styled.button`
     }
 `;
 
-const Formulario = () => {
+const Formulario = ( { guardarGastos }) => {
    
     const [ datos, guardarDatos ] = useState({
         marca: '',
@@ -122,6 +121,7 @@ const Formulario = () => {
       }));
 
     const obtenerInformacion = e => {
+        //e.preventDefault();
 
         if (e.target.name === 'marca') {
 
@@ -150,6 +150,28 @@ const Formulario = () => {
         guardarBusqueda(false);
     }
 
+    useEffect(() => {
+
+        const precioKm = calculoCombustible(combustible, infoVehiculo.consumo)
+
+        if (combustible === '' || consumo === 0 || costeTotal === 0) return null;
+
+        guardarGastos({
+            datos,
+            consumo : infoVehiculo.consumo,
+            costeKm : precioKm.toFixed(3),
+            costeTotal : (precioKm * kilometros).toFixed(3)
+        })
+
+        guardarDatos({
+            ...datos,
+            consumo : 0,
+            costeKm : 0,
+            costeTotal : 0
+        })
+        
+      }, [ datos ]);
+      
     const handleSubmit = e => {
         e.preventDefault();
 
@@ -175,6 +197,8 @@ const Formulario = () => {
 
         guardarBusqueda(true);
     }
+
+
 
     return (
         <form onSubmit = { handleSubmit }>
@@ -213,7 +237,7 @@ const Formulario = () => {
                 >
                     <option value="">-- Seleccione una marca --</option>
                     
-                    {modelos.map((m, key) => (
+                    { modelos.map((m, key) => (
                         <option key = { key } value  ={ m }>
                             { m }
                         </option>
@@ -261,20 +285,6 @@ const Formulario = () => {
                     onChange = { obtenerInformacion }
                 /> Eléctrico
             </Campos>
-
-
-            {
-                busqueda
-                ?
-                <Gasto
-                    consumo = { consumo }
-                    costeKm = { costeKm }
-                    costeTotal = { costeTotal }
-                    combustible = { combustible }
-                />
-                :
-                null
-            }
 
             <Boton
                 type = 'submit'

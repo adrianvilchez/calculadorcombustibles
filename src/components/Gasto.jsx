@@ -1,16 +1,26 @@
 import React, { Fragment } from 'react';
+import { formateoGastos } from '../helper';
+import { tipoConsumo } from '../helper';
+import { tipoCoste } from '../helper';
 
-const Gasto = ( {consumo, costeKm, costeTotal, combustible} ) => {
+const Gasto = ( { datos } ) => {
+
+    const { combustible, consumo, costeKm, costeTotal} = formateoGastos(datos);
+
+    if (combustible === '' || consumo === 0 ||
+        costeKm === 0 ||
+        costeTotal === 0) return null; 
+        
     return (
         <Fragment>
             <div>
-                Consumo/100km: { consumo.toString().replace('.', ',') } {combustible === 'electrico' ? 'kWh' : 'l/100km'}
+                Consumo/100km: { consumo } { tipoConsumo(combustible) }
             </div>
             <div>
-            {combustible === 'electrico' ? '€/kW' : '€/km'}: { costeKm.toString().replace('.', ',') } €
+            { tipoCoste(combustible) }: { costeKm } €
             </div>
             <div>
-                Coste Total: { costeTotal.toString().replace('.', ',') } €
+                Coste Total: { costeTotal } €
             </div>
         </Fragment>
     )
