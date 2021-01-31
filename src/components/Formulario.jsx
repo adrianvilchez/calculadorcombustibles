@@ -123,7 +123,7 @@ const Formulario = ( { guardarGastos }) => {
     const obtenerInformacion = e => {
         //e.preventDefault();
 
-        if (e.target.name === 'marca') {
+        if (e.target.name === 'marca' && e.target.value !== '') {
 
             let modelosAux = [];
 
@@ -140,6 +140,10 @@ const Formulario = ( { guardarGastos }) => {
                     guardarInfoVehiculo(info);
                 }
             });
+        }
+
+        if (e.target.name === 'marca' && e.target.value === '') {
+            guardarModelos('');
         }
 
         guardarDatos({
@@ -237,11 +241,11 @@ const Formulario = ( { guardarGastos }) => {
                 >
                     <option value="">-- Seleccione una marca --</option>
                     
-                    { modelos.map((m, key) => (
+                    { modelos !== '' ? modelos.map((m, key) => (
                         <option key = { key } value  ={ m }>
                             { m }
                         </option>
-                    ))}
+                    )) : null}
                 </Select>
             </Campos>
 
