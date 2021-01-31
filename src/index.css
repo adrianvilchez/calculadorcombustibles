@@ -17,18 +17,16 @@ span.resultado {
   width: 100%;
 }
 .resultado-enter {
-  transition: .5s;
+  transition: 1s;
 }
 .resultado-enter.resultado-enter-active{
   transform: translateY(0%);
 }
 .resultado-exit{
   transform: translateY(0);
-  transition: .5s;
+  transition: 1s;
   position : absolute;
-  left: 0;
   bottom : 0;
-  right: 0;
 }
 .resultado-exit-active{
   opacity: 0;
