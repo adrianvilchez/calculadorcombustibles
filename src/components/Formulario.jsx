@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Error from './Error';
+import PropTypes from 'prop-types';
 
 import { calculoCombustible } from '../helper';
 
@@ -306,6 +307,11 @@ const Formulario = ( { guardarGastos, guardarCargando }) => {
             </Boton>
         </form>
     )
+}
+
+Formulario.propTypes = {
+    guardarGastos: PropTypes.func.isRequired,
+    guardarCargando: PropTypes.func.isRequired
 }
 
 export default Formulario;

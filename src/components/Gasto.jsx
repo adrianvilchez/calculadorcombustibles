@@ -5,6 +5,7 @@ import { tipoCoste } from '../helper';
 
 import styled from '@emotion/styled';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import PropTypes from 'prop-types';
 
 
 const ContenedorGasto = styled.div`
@@ -57,6 +58,10 @@ const Gasto = ( { datos } ) => {
             </ContenedorGasto>
         </Fragment>
     )
+}
+
+Gasto.prpTypes = {
+    datos: PropTypes.object.isRequired
 }
 
 export default Gasto;
