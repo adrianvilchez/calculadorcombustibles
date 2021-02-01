@@ -48,14 +48,14 @@ function App() {
                 guardarCargando = { guardarCargando }
             />
 
-            { cargando ? <Carga /> : null }
-
             <Gasto
                 datos = { datos }
             />
 
         </ContenedorFormulario>
 
+        { cargando ? <Carga /> : null }
+        
     </ContenedorPrincipal>
   );
 }

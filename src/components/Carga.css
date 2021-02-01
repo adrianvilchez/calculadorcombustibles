@@ -1,10 +1,13 @@
 .sk-chase {
     margin: 0 auto;
-    margin-top: 2em;
-    width: 40px;
-    height: 40px;
-    position: relative;
+    width: 50px;
+    height: 50px;
+    position: fixed;
     animation: sk-chase 2.5s infinite linear both;
+    left: calc(50% - 25px); /* Obtenemos la mitad de la pantalla
+    y le restamos la mitad del ancho del elemento
+    para que quede perfectamente en el centro*/
+    top: 35%;
   }
   
   .sk-chase-dot {
