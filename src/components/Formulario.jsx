@@ -191,7 +191,8 @@ const Formulario = ( { guardarGastos, guardarCargando }) => {
 
         if (marca.trim() === ''
             || modelo.trim() === ''
-            || kilometros === 0
+            || kilometros == 0
+            || kilometros === ''
             || combustible.trim() === '') {
             guardarError(true);
             return;
